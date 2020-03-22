@@ -1,0 +1,84 @@
+Links interessantes:
+http://blog.caelum.com.br/rest-principios-e-boas-praticas/
+https://nodejs.org/en/
+
+
+Abaixo comandos para criar o banco de dados:
+
+create database NodeREST
+
+Create table Clientes(
+id int auto_increment primary key,
+nome varchar(100),
+cpf decimal(11,0)
+)
+
+select * from clientes
+
+
+Aqui dois links com conteúdos interessantes para se ler sobre Sequelize e ORM:
+
+http://docs.sequelizejs.com/
+
+http://docs.sequelizejs.com/manual/installation/getting-started
+
+
+
+Instalar o sequelize no projeto:
+npm install -g sequelize-cli express-generator
+
+Criar as pastas e arquivos de ORM:
+express
+
+Instalar as bibliotecas npm e para acesso ao banco de dados.
+npm install
+npm install --save sequelize 
+
+npm install --save mysql2
+
+Iniciar o sequelize e criar as Models
+sequelize init
+
+setar a porta do banco de dados
+"port": 3307
+
+
+Comando para criar as pastas e arquivos de models
+
+sequelize model:create --name clientes --attributes id:string,nome:string,cpf:string
+
+
+Alteração no arquivo clientes.js na pasta Models
+
+id: {
+type:DataTypes.STRING,
+primaryKey:true,
+autoIncrement:true
+}
+
+
+Conteúdo da função router.get
+ model.clientes.findAll({})
+      .then(clientes => res.json({
+          error: false,
+          data: clientes
+      }))
+      .catch(error => res.json({
+          error: true,
+          data: [],
+          error: error
+      }));
+
+
+ no arquivo app.js adicionar as seguintes linhas:
+
+ app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+app.listen(8080, function(){
+  console.info('Servidor rodando na porta 8080');
+});
